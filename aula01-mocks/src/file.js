@@ -1,6 +1,7 @@
 const { readFile } = require("fs/promises");
 const { error } = require("./constants");
 const { EOL } = require("os");
+const { User } = require("./user");
 
 const DEFAULT_OPTION = {
   maxLines: 3,
@@ -58,7 +59,7 @@ class File {
       for (const index in columns) {
         user[header[index]] = columns[index];
       }
-      return user;
+      return new User(user);
     });
 
     return users;

@@ -23,21 +23,21 @@ const { rejects, deepStrictEqual } = require("assert");
         id: 123,
         name: "John Doe",
         profession: "Software Engineer",
-        age: 40,
+        birthYear: 1988,
       },
       {
         id: 234,
         name: "Sarah Smith",
         profession: "SAP Consultant",
-        age: 38,
+        birthYear: 1983,
       },
       {
         id: 345,
         name: "Kevin Bacon",
         profession: "Director of Marketing",
-        age: 42,
+        birthYear: 1979,
       },
     ];
-    deepStrictEqual(result, expected);
+    deepStrictEqual(JSON.stringify(result), JSON.stringify(expected));
   }
 })();
