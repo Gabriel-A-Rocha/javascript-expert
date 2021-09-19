@@ -66,10 +66,4 @@ class File {
   }
 }
 
-/* (async () => {
-  const filePath = "./../mocks/threeItems-valid.csv";
-  const content = await File.getFileContent(filePath);
-  const users = await File.parseCSVToJSON(content);
-})(); */
-
 module.exports = File;
