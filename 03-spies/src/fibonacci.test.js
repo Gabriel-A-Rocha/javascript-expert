@@ -15,10 +15,11 @@ const { deepStrictEqual } = require("assert");
   {
     const fibonacci = new Fibonacci();
     const spy = sinon.spy(fibonacci, "execute");
+
     const [...results] = fibonacci.execute(5);
+    const expectedResult = [0, 1, 1, 2, 3];
 
     const { args } = spy.getCall(2);
-    const expectedResult = [0, 1, 1, 2, 3];
     const expectedParams = Object.values({
       input: 3,
       current: 1,
