@@ -1,0 +1,16 @@
+[
+    {
+        "id": "d16c5331-1a02-497c-aa31-5e3224911ef8",
+        "name": "ATS",
+        "releaseYear": 1997,
+        "available": true,
+        "gasAvailable": true
+    },
+    {
+        "id": "c3bc6d23-ba3f-4270-813d-f877011a0be0",
+        "name": "Camry",
+        "releaseYear": 1986,
+        "available": true,
+        "gasAvailable": true
+    }
+]
