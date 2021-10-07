@@ -5,9 +5,7 @@ const { Car } = require("../src/entities/car");
 const { CarCategory } = require("../src/entities/carCategory");
 const { Customer } = require("../src/entities/customer");
 
-const seederBaseFolder = join(__dirname, "..", "database");
-
-const ITEMS_AMOUNT = 2;
+const ITEMS_AMOUNT = 3;
 
 const carCategory = new CarCategory({
   id: faker.datatype.uuid(),
@@ -36,6 +34,8 @@ for (let i = 0; i < ITEMS_AMOUNT; i++) {
   });
   customers.push(customer);
 }
+
+const seederBaseFolder = join(__dirname, "..", "database");
 
 const write = async (filename, data) => {
   const filePath = join(seederBaseFolder, filename);
