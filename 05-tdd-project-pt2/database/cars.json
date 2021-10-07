@@ -1,0 +1,23 @@
+[
+    {
+        "id": "ac55c6cb-b778-42e0-acd1-c052acd91de1",
+        "name": "Sentra",
+        "releaseYear": 1995,
+        "available": true,
+        "gasAvailable": true
+    },
+    {
+        "id": "39b7eece-5bd2-46f4-b174-bbca23caea52",
+        "name": "911",
+        "releaseYear": 2018,
+        "available": true,
+        "gasAvailable": true
+    },
+    {
+        "id": "71abdc33-c816-44d9-b2a4-c4a7d764866a",
+        "name": "Grand Caravan",
+        "releaseYear": 2015,
+        "available": true,
+        "gasAvailable": true
+    }
+]
