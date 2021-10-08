@@ -1,7 +1,8 @@
-const { describe, it, before } = require("mocha");
+const { describe, it, before, beforeEach, afterEach } = require("mocha");
 const { CarService } = require("../../src/service/carService");
 const { join } = require("path");
-const assert = require("assert");
+const { expect } = require("chai");
+const sinon = require("sinon");
 
 const carsDatabase = join(__dirname, "..", "..", "database", "cars.json");
 
@@ -13,8 +14,39 @@ const mocks = {
 
 describe("CarService Test Suite", () => {
   let carService = {};
+  let sandbox = {};
   before(() => {
     carService = new CarService({ cars: carsDatabase });
+  });
+
+  beforeEach(() => {
+    sandbox = sinon.createSandbox();
+  });
+
+  afterEach(() => {
+    sandbox = sinon.restore();
+  });
+
+  it("should retrieve a random position from an array", () => {
+    const data = [0, 1, 2, 3, 4];
+    const result = carService.getRandomPositionFromArray(data);
+
+    expect(result).to.be.lt(data.length).and.be.gte(0);
+    expect(result).to.be.lt(data.length).and.be.gte(0);
+    expect(result).to.be.lt(data.length).and.be.gte(0);
+  });
+
+  it("should retrieve the first id from carIds in carCategory", () => {
+    const carCategory = mocks.validCarCategory;
+    const carIndex = 0;
+
+    sandbox.stub(carService, "getRandomPositionFromArray").returns(carIndex);
+
+    const result = carService.chooseRandomCar(carCategory);
+    const expected = carCategory.carIds[carIndex];
+
+    expect(carService.getRandomPositionFromArray.calledOnce).to.be.ok;
+    expect(result).to.be.equal(expected);
   });
 
   it("given a car category it should return an available car", async () => {
@@ -23,7 +55,14 @@ describe("CarService Test Suite", () => {
     const carCategory = Object.create(mocks.validCarCategory);
     carCategory.carIds = [car.id];
 
+    sandbox.stub(carService.carRepository, "find").resolves(car);
+    sandbox.spy(carService, "chooseRandomCar");
+
     const result = await carService.getAvailableCar(carCategory);
     const expected = car;
+
+    expect(carService.chooseRandomCar.calledOnce).to.be.ok;
+    expect(carService.carRepository.find.calledWithExactly(car.id)).to.be.ok;
+    expect(result).to.be.deep.equal(expected);
   });
 });
