@@ -30,16 +30,13 @@ describe("CarService Test Suite", () => {
   it("should retrieve a random position from an array", () => {
     const data = [0, 1, 2, 3, 4];
     const result = carService.getRandomPositionFromArray(data);
-
-    expect(result).to.be.lt(data.length).and.be.gte(0);
-    expect(result).to.be.lt(data.length).and.be.gte(0);
     expect(result).to.be.lt(data.length).and.be.gte(0);
   });
 
   it("should retrieve the first id from carIds in carCategory", () => {
     const carCategory = mocks.validCarCategory;
+    // the randomness was already tested, return must now be predictable
     const carIndex = 0;
-
     sandbox.stub(carService, "getRandomPositionFromArray").returns(carIndex);
 
     const result = carService.chooseRandomCar(carCategory);
@@ -53,8 +50,9 @@ describe("CarService Test Suite", () => {
     const car = mocks.validCar;
     // Object.create prevents the parent object from being changed
     const carCategory = Object.create(mocks.validCarCategory);
+    // avoid randomness by assigning a single car to the category
     carCategory.carIds = [car.id];
-
+    // remove database dependency
     sandbox.stub(carService.carRepository, "find").resolves(car);
     sandbox.spy(carService, "chooseRandomCar");
 
