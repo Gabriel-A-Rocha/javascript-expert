@@ -24,9 +24,9 @@ And the final price will be printed in Brazilian Portuguese format as "R$ 244,40
 
 As a system user  
 In order to register a renting transaction  
-Given a registered customer who is 50 years old  
+Given a registered customer who is 20 years old  
 And a car model that costs $37.6 per day  
-And a delivery date that is for 05 days behind  
+And a delivery date that is 05 days ahead  
 And given an actual date 05/11/2020  
 When I rent a car I should see the customer data  
 And the car selected  
