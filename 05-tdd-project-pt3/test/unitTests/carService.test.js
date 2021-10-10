@@ -95,6 +95,8 @@ describe("CarService Test Suite", () => {
     // new Date() becomes the date specified (predictable test)
     sandbox.useFakeTimers(now.getTime());
 
+    sandbox.stub(carService.carRepository, "find").resolves(car);
+
     const expectedAmount = carService.currencyFormat.format(206.8);
     const result = await carService.rent(customer, carCategory, numberOfDays);
 
