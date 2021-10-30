@@ -4,7 +4,7 @@ import DraftLog from "draftlog";
 import chalk from "chalk";
 import chalkTable from "chalk-table";
 import readline from "readline";
-import Person from "./person.js";
+import { Person } from "./person.js";
 
 export class TerminalController {
   constructor() {

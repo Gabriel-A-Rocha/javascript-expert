@@ -40,7 +40,7 @@ export class Person {
     const [id, vehicles, kmTraveled, from, to] = text.split(EMPTY_SPACE);
 
     const person = new Person({
-      id,
+      id: Number(id),
       vehicles: vehicles.split(","),
       kmTraveled,
       from,
