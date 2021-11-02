@@ -9,5 +9,5 @@ export const save = async (data) => {
 
   currentData.push(data);
 
-  writeFile(databaseFile, JSON.stringify(currentData));
+  await writeFile(databaseFile, JSON.stringify(currentData));
 };

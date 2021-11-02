@@ -13,7 +13,7 @@ describe("Person", () => {
     const person = Person.generateInstanceFromString(str);
 
     const expected = {
-      id: "1",
+      id: 1,
       vehicles: ["Cruze", "Elantra"],
       kmTraveled: "50000",
       from: "2020-10-10",

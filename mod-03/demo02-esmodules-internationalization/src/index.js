@@ -26,7 +26,7 @@ async function mainLoop() {
 
     return mainLoop();
   } catch (error) {
-    console.log("An error occurred!");
+    console.log("An error occurred!", error);
     return mainLoop();
   }
 }
