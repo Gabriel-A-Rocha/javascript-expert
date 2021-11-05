@@ -44,8 +44,33 @@ class MyDate {
   constructor(...args) {
     this[kItems] = args.map((arg) => new Date(...arg));
   }
+
+  [Symbol.toPrimitive](coercionType) {
+    if (coercionType !== "string") throw new TypeError();
+
+    const dataTimeOptions = {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    };
+
+    const items = this[kItems].map((item) =>
+      new Intl.DateTimeFormat("pt-BR", dataTimeOptions).format(item)
+    );
+
+    const listOptions = {
+      style: "long",
+      type: "conjunction",
+    };
+
+    return new Intl.ListFormat("pt-BR", listOptions).format(items);
+  }
 }
 
-const myDate = new MyDate([2020, 0, 3], [2020, 1, 8], [2020, 2, 12]);
+const myDate = new MyDate([2020, 0, 3], [2020, 1, 8]);
 
 console.log("myDate", myDate);
+assert.throws(() => Number(myDate), TypeError);
+
+console.log("String(myDate)", String(myDate));
+assert.deepStrictEqual(String(myDate), "03 de janeiro de 2020 e 08 de fevereiro de 2020");
