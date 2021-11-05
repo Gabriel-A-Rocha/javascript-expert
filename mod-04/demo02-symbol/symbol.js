@@ -1,3 +1,4 @@
+const { deepStrictEqual } = require("assert");
 const assert = require("assert");
 
 // Unique Keys
@@ -53,7 +54,6 @@ class MyDate {
       month: "long",
       year: "numeric",
     };
-
     const items = this[kItems].map((item) =>
       new Intl.DateTimeFormat("pt-BR", dataTimeOptions).format(item)
     );
@@ -62,15 +62,44 @@ class MyDate {
       style: "long",
       type: "conjunction",
     };
-
     return new Intl.ListFormat("pt-BR", listOptions).format(items);
+  }
+
+  // add iterator to the object (for...of)
+  *[Symbol.iterator]() {
+    for (let i = 0; i < this[kItems].length; i++) yield this[kItems][i];
+  }
+
+  // add async iterator to the object (for await...of)
+  async *[Symbol.asyncIterator]() {
+    const timeout = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    for (const item of this[kItems]) {
+      await timeout(500);
+      yield item.toISOString();
+    }
   }
 }
 
 const myDate = new MyDate([2020, 0, 3], [2020, 1, 8]);
 
-console.log("myDate", myDate);
 assert.throws(() => Number(myDate), TypeError);
-
-console.log("String(myDate)", String(myDate));
 assert.deepStrictEqual(String(myDate), "03 de janeiro de 2020 e 08 de fevereiro de 2020");
+
+const expectedDates = [new Date(2020, 0, 3), new Date(2020, 1, 8)];
+
+// iterator
+assert.deepStrictEqual([...myDate], expectedDates);
+console.log("[...myDate]", [...myDate]);
+
+for (let date of myDate) {
+  console.log("iterator - date", date);
+}
+
+// async iterator
+(async () => {
+  const dates = [];
+  for await (let date of myDate) {
+    console.log("async iterator - date", date);
+    dates.push[date];
+  }
+})();
