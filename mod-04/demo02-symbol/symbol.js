@@ -16,7 +16,6 @@ assert.deepStrictEqual(user[Symbol("userName")], undefined);
 assert.deepStrictEqual(Object.getOwnPropertySymbols(user)[0], uniqueKey);
 
 // Well Known Symbols
-
 const obj = {
   [Symbol.iterator]: () => {
     return {
@@ -35,8 +34,6 @@ for (let item of obj) {
   console.log("item", item);
 }
 
-console.log([...obj]);
-
 assert.deepStrictEqual([...obj], ["a", "b", "c"]);
 
 const kItems = Symbol("kItems");
@@ -46,6 +43,7 @@ class MyDate {
     this[kItems] = args.map((arg) => new Date(...arg));
   }
 
+  // add coercion mechanism
   [Symbol.toPrimitive](coercionType) {
     if (coercionType !== "string") throw new TypeError();
 
@@ -63,12 +61,12 @@ class MyDate {
     }).format(items);
   }
 
-  // add iterator to the object (for...of)
+  // add iterator capability (for...of)
   *[Symbol.iterator]() {
     for (let i = 0; i < this[kItems].length; i++) yield this[kItems][i];
   }
 
-  // add async iterator to the object (for await...of)
+  // add async iterator capability (for await...of)
   async *[Symbol.asyncIterator]() {
     const timeout = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     for (const item of this[kItems]) {
@@ -99,5 +97,21 @@ for (let date of myDate) {
   for await (let date of myDate) {
     console.log("async iterator - date", date);
     dates.push[date];
+  }
+})();
+
+const fs = require("fs");
+const path = require("path");
+
+(async () => {
+  try {
+    const filePath = path.join(__dirname, "file.txt");
+    const readStream = fs.createReadStream(filePath, { encoding: "utf8" });
+    for await (const chunk of readStream) {
+      console.log(chunk);
+    }
+    console.log("End of file");
+  } catch (error) {
+    console.log(error);
   }
 })();
