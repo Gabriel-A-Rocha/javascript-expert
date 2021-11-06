@@ -49,20 +49,18 @@ class MyDate {
   [Symbol.toPrimitive](coercionType) {
     if (coercionType !== "string") throw new TypeError();
 
-    const dataTimeOptions = {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    };
     const items = this[kItems].map((item) =>
-      new Intl.DateTimeFormat("pt-BR", dataTimeOptions).format(item)
+      new Intl.DateTimeFormat("pt-BR", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      }).format(item)
     );
 
-    const listOptions = {
+    return new Intl.ListFormat("pt-BR", {
       style: "long",
       type: "conjunction",
-    };
-    return new Intl.ListFormat("pt-BR", listOptions).format(items);
+    }).format(items);
   }
 
   // add iterator to the object (for...of)
