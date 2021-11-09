@@ -66,3 +66,14 @@ console.log(obj.toString());
 // clear capability
 myMap.clear();
 deepStrictEqual(myMap.size, 0);
+
+// Weak Map - garbage collected after losing references
+// prevents memory leaks
+const weakMap = new WeakMap();
+
+let hero = { name: "Superman" };
+weakMap.set(hero, { identity: "Clark Joseph Kent" });
+console.log(weakMap.get(hero));
+
+hero = null;
+console.log(weakMap.get(hero));
