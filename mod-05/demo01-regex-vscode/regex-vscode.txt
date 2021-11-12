@@ -1,0 +1,13 @@
+^\d{3}.\d{3}.\d{3}-\d{2}$
+
+123.123.123-87
+675.351.555-90
+362.834.672-14
+
+^(\w+),\s(\w+)$
+
+Lennon, John
+McCartney, Paul
+
+Find: ^(\w+),\s(\w+)$
+Replace All: {firstName: "$2", lastName: "$1"}
