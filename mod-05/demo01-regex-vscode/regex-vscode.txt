@@ -11,3 +11,14 @@ McCartney, Paul
 
 Find: ^(\w+),\s(\w+)$
 Replace All: {firstName: "$2", lastName: "$1"}
+
+
+Find: \[(.*?)\]\((https*.*?)\)
+Replace All: <a href="$2">$1</a>
+
+Lorem ipsum dolor sit amet consectetur [First Title](http://www.google.com) Maxime mollitia, molestiae [Second Title](http:globo.com) repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, [eaque] rerum! (http://www.yahoo.com) Provident similique accusantium nemo autem. Veritatis
+
+obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
+nihil, eveniet aliquid culpa [Google](https://www.google.com) officia aut! Impedit sit sunt quaerat, odit,
+tenetur error, harum nesciunt ipsum debitis quas aliquid.
+
