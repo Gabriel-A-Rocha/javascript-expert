@@ -13,10 +13,10 @@ class Person {
     this.nacionalidade = formatFirstLetter(nacionalidade);
     this.estadoCivil = formatFirstLetter(estadoCivil);
     this.documento = documento.replace(evaluateRegex(/\D/g), "");
-    this.rua = rua;
+    this.rua = rua.match(evaluateRegex(/(?<=\sa\s).*$/))[0];
     this.numero = numero;
-    this.bairro = bairro;
-    this.estado = estado;
+    this.bairro = bairro.match(/(?<=\s).*$/)[0];
+    this.estado = estado.match(/^.*(?=\.)/)[0];
   }
 }
 
