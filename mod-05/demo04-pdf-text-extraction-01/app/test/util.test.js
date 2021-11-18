@@ -14,7 +14,7 @@ describe("util", () => {
 
   it("evaluateRegex should not throw an error if regex is valid", () => {
     const safeRegex = /^([a-z])$/gim;
-    expect(() => evaluateRegex(safeRegex)).to.not.throw;
+    expect(() => evaluateRegex(safeRegex)).to.not.throw();
     expect(evaluateRegex(safeRegex)).to.be.ok;
     expect(evaluateRegex(safeRegex)).to.be.deep.equal(/^([a-z])$/gim);
   });
