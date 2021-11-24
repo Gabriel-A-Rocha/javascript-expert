@@ -1,4 +1,4 @@
-const { UserFactory } = require("./factory/userFactory");
+const UserFactory = require("./factory/userFactory");
 
 (async () => {
   const userService = await UserFactory.createInstance();

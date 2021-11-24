@@ -1,6 +1,6 @@
-const { UserRepository } = require("../repository/userRepository");
-const { UserService } = require("../service/userService");
-const { Database } = require("../util/database");
+const UserRepository = require("../repository/userRepository");
+const UserService = require("../service/userService");
+const Database = require("../util/database");
 
 class UserFactory {
   static async createInstance() {
@@ -13,4 +13,4 @@ class UserFactory {
   }
 }
 
-module.exports = { UserFactory };
+module.exports = UserFactory;
