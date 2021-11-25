@@ -1,4 +1,4 @@
-[
+export const database = [
   {
     balance: "$2,642.58",
     age: 28,
