@@ -9,7 +9,7 @@
     "surface_water": "1",
     "population": "200000",
     "residents": [
-        "https: //swapi.dev/api/people/1/",
+        "https://swapi.dev/api/people/1/",
         "https://swapi.dev/api/people/2/",
         "https://swapi.dev/api/people/4/",
         "https://swapi.dev/api/people/6/",
