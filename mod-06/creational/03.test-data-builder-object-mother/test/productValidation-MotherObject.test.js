@@ -2,12 +2,11 @@ const { expect } = require("chai");
 const { describe, it } = require("mocha");
 
 const { productValidator } = require("../src/index");
-const { ProductDataBuilder } = require("./model/productDataBuilder");
 const { ProductMotherObject } = require("./model/productMotherObject");
 
-describe("Test Data Builder", () => {
+describe("Test Mother Object", () => {
   it("should not return error for a valid product", () => {
-    const product = ProductDataBuilder.aProduct().build();
+    const product = ProductMotherObject.valid();
     const result = productValidator(product);
 
     const expected = {
@@ -20,7 +19,7 @@ describe("Test Data Builder", () => {
 
   describe("Product validation rules", () => {
     it("should return an object error when creating product with invalid id", () => {
-      const product = ProductDataBuilder.aProduct().withInvalidId().build();
+      const product = ProductMotherObject.withInvalidId();
       const result = productValidator(product);
 
       const expected = {
@@ -32,7 +31,7 @@ describe("Test Data Builder", () => {
     });
 
     it("should return an object error when creating product with invalid name", () => {
-      const product = ProductDataBuilder.aProduct().withInvalidName().build();
+      const product = ProductMotherObject.withInvalidName();
       const result = productValidator(product);
 
       const expected = {
@@ -44,7 +43,7 @@ describe("Test Data Builder", () => {
     });
 
     it("should return an object error when creating product with invalid price", () => {
-      const product = ProductDataBuilder.aProduct().withInvalidPrice().build();
+      const product = ProductMotherObject.withInvalidPrice();
       const result = productValidator(product);
 
       const expected = {
@@ -56,7 +55,7 @@ describe("Test Data Builder", () => {
     });
 
     it("should return an object error when creating product with invalid category", () => {
-      const product = ProductDataBuilder.aProduct().withInvalidCategory().build();
+      const product = ProductMotherObject.withInvalidCategory();
       const result = productValidator(product);
 
       const expected = {
