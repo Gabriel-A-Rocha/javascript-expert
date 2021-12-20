@@ -1,6 +1,6 @@
 //prettier-ignore
 
-module.exports = {
+export default {
   clearMocks: true,
   coverageDirectory: "coverage",
   coverageProvider: "v8",  
