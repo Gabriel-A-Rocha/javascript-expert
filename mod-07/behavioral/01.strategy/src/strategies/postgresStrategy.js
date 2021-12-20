@@ -3,7 +3,9 @@ export class PostgresStrategy {
     this.dbStrategy = dbStrategy;
   }
 
-  connect() {}
+  connect() {
+    console.log("connecting...");
+  }
 
   create(item) {}
 
