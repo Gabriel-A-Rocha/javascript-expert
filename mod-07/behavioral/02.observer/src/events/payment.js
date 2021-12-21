@@ -4,7 +4,7 @@ export default class Payment {
   }
 
   creditCard(paymentData) {
-    console.log(`\nA payment was made from user ${paymentData.userName}`);
+    console.log(`\nA payment was received from user ${paymentData.userName}`);
     this.paymentSubject.notify(paymentData);
   }
 }
