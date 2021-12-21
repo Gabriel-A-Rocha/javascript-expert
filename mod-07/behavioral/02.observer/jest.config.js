@@ -1,5 +1,4 @@
 //prettier-ignore
-
 export default {
   clearMocks: true,
   coverageDirectory: "coverage",
