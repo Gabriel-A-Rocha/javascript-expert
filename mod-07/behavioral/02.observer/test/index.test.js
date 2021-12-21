@@ -1,5 +1,7 @@
 import { expect, describe, test, jest } from "@jest/globals";
 import Payment from "../src/events/payment.js";
+import Marketing from "../src/observers/marketing.js";
+import Shipment from "../src/observers/shipment.js";
 import PaymentSubject from "../src/subjects/paymentSubject.js";
 
 describe("Test Suite for Observer Pattern", () => {
@@ -42,5 +44,26 @@ describe("Test Suite for Observer Pattern", () => {
     expect(paymentSubjectNotifierSpy).toHaveBeenCalledWith(data);
   });
 
-  test.todo("#All should notify subscribers after a credit card transaction");
+  test("#All should notify subscribers after a credit card transaction", () => {
+    const subject = new PaymentSubject();
+
+    const shipment = new Shipment();
+    const marketing = new Marketing();
+    subject.subscribe(shipment);
+    subject.subscribe(marketing);
+
+    const payment = new Payment(subject);
+
+    const marketingUpdateSpy = jest.spyOn(marketing, "update");
+    const shipmentUpdateSpy = jest.spyOn(shipment, "update");
+
+    const data = {
+      id: Date.now(),
+      userName: "Gabriel Rocha",
+    };
+    payment.creditCard(data);
+
+    expect(marketingUpdateSpy).toHaveBeenCalledWith(data);
+    expect(shipmentUpdateSpy).toHaveBeenCalledWith(data);
+  });
 });
