@@ -9,5 +9,7 @@ export default class PaymentSubject {
     this.#observers.add(observable);
   }
 
-  unsubscribe(observable) {}
+  unsubscribe(observable) {
+    this.#observers.delete(observable);
+  }
 }
