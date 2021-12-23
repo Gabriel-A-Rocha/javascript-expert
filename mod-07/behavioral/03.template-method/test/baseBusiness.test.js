@@ -1,8 +1,12 @@
-import { expect, describe, it, test, jest } from "@jest/globals";
+import { expect, describe, it, test, jest, beforeEach } from "@jest/globals";
 import BaseBusiness from "../src/business/base/baseBusiness.js";
 import { NotImplementedException } from "../src/util/exceptions.js";
 
 describe("BaseBusiness Abstract Class", () => {
+  beforeEach(() => {
+    jest.restoreAllMocks();
+  });
+
   it("should throw if child class does not implement _validateRequiredFields method", () => {
     class ConcreteClass extends BaseBusiness {}
     const concreteClass = new ConcreteClass();
