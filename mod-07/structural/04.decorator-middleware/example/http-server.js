@@ -1,6 +1,7 @@
 import http from "http";
 
 function handleRequest(req, res) {
+  res.setHeader("X-Instrumented-By", "Gabriel Rocha");
   res.end("Hello world");
 }
 
