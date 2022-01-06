@@ -1,7 +1,9 @@
 import http from "http";
+import { InjectHttpInterceptor } from "../src/agent.js";
+
+InjectHttpInterceptor();
 
 function handleRequest(req, res) {
-  res.setHeader("X-Instrumented-By", "Gabriel Rocha");
   res.end("Hello world");
 }
 
