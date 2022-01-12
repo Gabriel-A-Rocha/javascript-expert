@@ -13,6 +13,7 @@ http
     const params = new URLSearchParams(url);
     const data = Object.fromEntries(params);
     const result = netSalary(data);
+    debugger;
     res.end(`Final salary: ${result}`);
   })
   .listen(3000, () => console.log("Server running at port 3000"));
