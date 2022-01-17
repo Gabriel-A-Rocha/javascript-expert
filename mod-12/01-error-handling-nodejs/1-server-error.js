@@ -15,12 +15,12 @@ async function handler(req, res) {
         if (count % 2 !== 0) {
           await Promise.reject("error inside for await loop");
           // Error: Server returned nothing (no headers, no data)
-          res.end();
         }
       } catch (error) {
         console.log("A request error occured!", error);
         res.writeHead(500);
         res.write(JSON.stringify({ message: "REQUEST error!" }));
+      } finally {
         res.end();
       }
     }
