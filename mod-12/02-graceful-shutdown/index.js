@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import { createServer } from "http";
+import { promisify } from "util";
 
 async function dbConnect() {
   // connection URL
@@ -42,8 +43,22 @@ async function handler(request, response) {
   }
 }
 
-//client.close();
+const server = createServer(handler).listen(3000, () => {
+  console.log({ status: "Server listening at port 3000", processId: process.pid });
+});
 
-const server = createServer(handler).listen(3000, () =>
-  console.log({ status: "Server listening at port 3000", processId: process.pid })
-);
+const onStop = async (signal) => {
+  console.log(`\n${signal} signal received!`);
+
+  console.log("HTTP server stopping...");
+  await promisify(server.close.bind(server))();
+  console.log("HTTP server stopped!");
+
+  console.log("MongoDB connection stopping...");
+  await client.close();
+  console.log("MongoDB connection stopped!");
+
+  process.exit(0);
+};
+
+["SIGINT", "SIGTERM"].forEach((event) => process.on(event, onStop));
