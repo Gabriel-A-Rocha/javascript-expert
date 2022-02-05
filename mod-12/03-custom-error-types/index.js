@@ -4,7 +4,7 @@ async function handler(request, response) {
   for await (const data of request) {
     try {
       const hero = JSON.parse(data);
-      console.log("\n🪁 ~ hero ", hero);
+
       response.writeHead(200);
       response.end();
     } catch (error) {
