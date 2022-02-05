@@ -2,6 +2,7 @@
 
 import { createServer } from "http";
 import { BusinessError } from "./errors/businessError.js";
+import { statusCodes } from "./utils/httpStatusCodes.js";
 
 /**
  * Validation for request payload
@@ -25,16 +26,16 @@ async function handler(request, response) {
       const hero = JSON.parse(data);
       validateHero(hero);
 
-      response.writeHead(200);
+      response.writeHead(statusCodes.OK);
       response.end();
     } catch (error) {
       if (error instanceof BusinessError) {
-        response.writeHead(400);
+        response.writeHead(statusCodes.BAD_REQUEST);
         response.end(error.message);
         continue;
       }
 
-      response.writeHead(500);
+      response.writeHead(statusCodes.INTERNAL_SERVER_ERROR);
       response.end("Internal server problem!");
     }
   }
