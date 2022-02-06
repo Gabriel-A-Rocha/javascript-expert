@@ -7,13 +7,13 @@ import { statusCodes } from "./utils/httpStatusCodes.js";
 async function handler(request, response) {
   for await (const data of request) {
     try {
-      const parsedDate = JSON.parse(data);
+      const parsedData = JSON.parse(data);
 
-      if (Reflect.has(parsedDate, "connectionError")) {
+      if (Reflect.has(parsedData, "connectionError")) {
         throw new Error("Database connection error!");
       }
 
-      const hero = new HeroEntity(parsedDate);
+      const hero = new HeroEntity(parsedData);
 
       if (!hero.isValid()) {
         response.writeHead(statusCodes.BAD_REQUEST);
